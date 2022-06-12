@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Place an Order</title>
+<style>
+.price{}
+</style>
+<script src="Scripts/jquery-2.0.3.min.js"></script>
+<script src="Scripts/modernizr-2.6.2.js"></script>
+<script>
+$(function () {
+    $("#Submit").click(function () {
+        var actualPrice=parseFloat($(".price").attr("data-value"));
+        var qty=parseInt($('#txtQty').val());
+        var calculateTotalPrice = actualPrice * qty;
+        var orderData = {
+            "OrderID": $("#txtOrderNo").val(),
+            "OrderDate": $("#txtOrderDate").val(),
+            "RequiredDate": $("#txtRequiredDate").val(),
+            "Price":$(".price").attr("data-value"),
+            "Qty": $("#txtQty").val(),
+            "TotalPrice": calculateTotalPrice,
+            "Address": $("#txtShipAddress").val(),
+            "City": $("#txtShipCity").val(),
+        };
+        if (Modernizr.localstorage) {
+            var jsonOrder = JSON.stringify(orderData);
+            var persistentData = window.localStorage;
+            persistentData.setItem("myOrder", jsonOrder);
+            window.location.href = "YourCart.html";
+        }
+       
+    });
+});
+</script>
+</head>
+<body>
+<section id="contact">
+<h1>Plasati comanda aici</h1>
+<table>
+<tr>
+    <td style="width:30%;">Order No</td>
+    <td style="width:70%;"><input id="txtOrderNo" type="text" autofocus /></td>
+
+</tr>
+<tr>
+    <td style="width:30%;">Order Date</td>
+    <td style="width:70%;"><input id="txtOrderDate" type="date" placeholder="Choose Order Date" max="12/12/2013" /></td>
+</tr>
+<tr>
+    <td style="width:30%;">Required Date</td>
+    <td style="width:70%;"><input id="txtRequiredDate" type="date" placeholder="Choose Required Date" /></td>
+</tr>
+<tr>
+    <td style="width:30%;">Choose Product</td>
+    <td style="width:70%;">
+        <select id="selectProduct">
+            <option value="Choose Product">Choose Product</option>
+            <option value="Laptop" class="price" data-value="25000">Laptop</option>
+            <option value="Tablet" class="price" data-value="12000">Tablet</option>
+            <option value="Washing Machine" class="price" data-value="15000">Washing Machine</option>
+            <option value="Oven" class="price" data-value="16000">Oven</option>
+            <option value="LED TV" class="price" data-value="42000">LED TV</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td style="width:30%;">Quantity</td>
+    <td style="width:70%;"><input id="txtQty" min="1" max="10" value="1" type="number" /></td>
+</tr>
+
+<tr>
+    <td style="width:30%;">Shipping Address</td>
+    <td style="width:70%;"><input id="txtShipAddress" type="text" /></td>
+</tr>
+<tr>
+    <td style="width:30%;">Shipping City</td>
+    <td style="width:70%;"><input id="txtShipCity" type="text" /></td>
+</tr>
+<tr>
+    <td style="width:100%;text-align:center;" colspan="2"><input id="Submit" type="submit" value="Submit Order" /></td>
+</tr>
+</table>
+</section>
+</body>
+</html>

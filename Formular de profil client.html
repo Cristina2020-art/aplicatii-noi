@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Customer Profile</title>
+</head>
+<body>
+<sectionid="contact"class="grad">
+<h1>Formular de profil client</h1>
+<form>
+<table>
+<tr>
+<td style="width:30%;">First Name</td>
+<td style="width:70%;"><input id="txtFirstName"type="text"placeholder="Enter First Name"/></td>
+</tr>
+<tr><br>
+<td style="width:30%;">Last Name</td>
+<td style="width:70%;"><input id="txtLastName"type="text"placeholder="Enter Last Name"/></td>
+</tr>
+<tr><br>
+<td style="width:30%;">Address</td>
+<td style="width:70%;"><input id="txtAddress"type="text"placeholder="Enter Your Address"/></td>
+</tr>
+<tr><br>
+<td style="width:30%;">City</td>
+<td style="width:70%;"><input id="txtCity"type="text"placeholder="Enter City Name"/></td>
+</tr>
+<tr><br>
+<td style="width:30%;">Contact No.</td>
+<td style="width:70%;"><input id="txtContactNo"type="text"placeholder="Enter Contact No."/></td>
+</tr>
+<tr><br>
+<td style="width:30%;">Email ID</td>
+<td style="width:70%;"><input id="txtEmailID"type="text"placeholder="Enter Email ID"/></td>
+</tr>
+<tr><br>
+<td style="width:100%;text-align:center;"colspan="2"><input id="Submit"type="submit"value="Submit Profile"/></td>
+</tr><br>
+</table>
+</form>
+</section>
+
+<script>
+$(function () {
+    $("#Submit").click(function () {
+        var customerProfile = {
+            "FirstName": $("#txtFirstName").val(),
+            "LastName": $("#txtLastName").val(),
+            "Address": $("#txtAddress").val(),
+            "City": $("#txtCity").val(),
+            "ContactNo": $("#txtContactNo").val(),
+            "EMailID": $("#txtEmailID").val(),
+        };
+        if (Modernizr.localstorage) {
+            var localCustomerProfile = window.localStorage;
+            var custProfile=JSON.stringify(customerProfile);
+            localCustomerProfile.setItem("Profile", custProfile);
+            window.location.href("Orders.html");
+        }
+    });
+});
+</script>
+
+</body>
+</html>
+

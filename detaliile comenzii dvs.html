@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Vezi detaliile comenzii tale</title>
+<script src="Scripts/jquery-2.0.3.min.js"></script>
+<script src="Scripts/modernizr-2.6.2.js"></script>
+<script>
+$(function () {
+    if (Modernizr.localstorage) {
+        var localData = window.localStorage;
+        var orderData = JSON.parse(localData.getItem("myOrder"));
+        var profile = JSON.parse(localData.getItem("Profile"));
+
+        $('#ContactName').text(profile.FirstName + ' ' + profile.LastName)
+        $('#ContactNo').text(profile.ContactNo);
+        $("#OrderID").text(orderData.OrderID);
+        $("#OrderDate").text(orderData.OrderDate);
+        $("#RequiredDate").text(orderData.RequiredDate);
+        $("#UnitPrice").text(orderData.Price);
+        $("#Qty").text(orderData.Qty);
+        $("#TotalPrice").text(orderData.TotalPrice);
+        $("#ShippingAddress").text(orderData.Address);
+        $("#ShippingCity").text(orderData.City);
+    }
+
+    if (Modernizr.sessionstorage) {
+    var sessionCustomerProfile = window.sessionStorage;
+    var custProfile = JSON.stringify(customerProfile);
+    sessionCustomerProfile.setItem("Profile", custProfile);
+    window.location.href = "Orders.html";
+}
+
+    if (Modernizr.sessionstorage) {
+    var jsonOrder = JSON.stringify(orderData);
+    var temporaryData = window.sessionStorage;
+    temporaryData.setItem("myOrder", jsonOrder);
+    window.location.href = "YourCart.html";
+}
+
+   if (Modernizr.sessionstorage) {
+    var sessionData = window.sessionStorage;
+    var orderData = JSON.parse(sessionData.getItem("myOrder"));
+    var profile = JSON.parse(sessionData.getItem("Profile"));
+}
+
+});
+</script>
+</head>
+<body>
+<div id="orderContainer">
+<h1>detaliile comenzii dvs</h1>
+<h2>Total Items in Your Cart</h2>
+<h3>Contact Name - [<span id="ContactName"></span>]</h3>
+<h3>Contact No   - [<span id="ContactNo"></span>]</h3>
+<div>
+<table border="1">
+<thead>
+    <tr>
+        <th>Order Id</th>
+        <th>Order Date</th>
+        <th>Required Date</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Total Amount</th>
+        <th>Shipping Address</th>
+        <th>Shipping City</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td><span id="OrderID"></span></td>
+        <td><span id="OrderDate"></span></td>
+        <td><span id="RequiredDate"></span></td>
+        <td>$<span id="UnitPrice"></span></td>
+        <td><span id="Qty"></span></td>
+        <td>$<span id="TotalPrice"></span></td>
+        <td><span id="ShippingAddress"></span></td>
+        <td><span id="ShippingCity"></span></td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>
